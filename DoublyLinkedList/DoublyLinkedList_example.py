@@ -10,6 +10,10 @@ a.next_node = b
 b.next_node = c
 c.next_node = d
 d.next_node = e
+e.previous_node = d
+d.previous_node = c
+c.previous_node = b
+b.previous_node = a
 
 ll = DoublyLinkedList(a)
 
