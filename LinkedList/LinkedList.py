@@ -72,7 +72,12 @@ class LinkedList():
 
     # remove head, default
     if position == 0:
-      self.head = self.head.next_node
+      previous_node = self.head
+      previous_node.data = self.head.data
+      if self.head.next_node:
+        self.head = self.head.next_node
+      else:
+        self.head = None
 
     # remove elsewhere
     else:
