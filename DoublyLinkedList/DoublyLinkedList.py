@@ -36,11 +36,11 @@ class DoublyLinkedList():
   def insert(self, data, position=0):
     # edge case: negative position
     if position < 0:
-      return 'Invalid position!'
+      raise WrongPositionException(position)
 
     new_node = Node(data)
 
-    # insert at head, default
+    # insert head, default
     if position == 0:
       old_head = self.head
       self.head = new_node
@@ -53,7 +53,7 @@ class DoublyLinkedList():
       for i in range(position):
         previous_node = following_node
         if previous_node == None:
-          return 'Invalid position!'
+          raise WrongPositionException(position)
         following_node = following_node.next_node
 
       previous_node.next_node = new_node
@@ -61,7 +61,8 @@ class DoublyLinkedList():
       new_node.next_node = following_node
       following_node.previous_node = new_node
 
-    return "Inserted node with value = {} at position = {}.".format(data, position)
+    print("Inserted node with value = {} at position = {}.".format(data, position))
+    return data
 
   def append(self, data):
     new_node = Node(data)
@@ -69,12 +70,13 @@ class DoublyLinkedList():
     old_tail.next_node = new_node
     new_node.previous_node = old_tail
 
-    return "Appended node with value = {} to DoublyLinkedList.".format(data)
+    print("Appended node with value = {} to DoublyLinkedList.".format(data))
+    return data
 
   def remove(self, position=0):
      # edge case: negative position
     if position < 0:
-      return 'Invalid position!'
+      raise WrongPositionException(position)
 
     # remove head, default
     if position == 0:
@@ -92,10 +94,20 @@ class DoublyLinkedList():
       for i in range(position):
         previous_node = following_node
         if following_node.next_node == None:
-          return 'Invalid position!'
+          raise WrongPositionException(position)
         following_node = following_node.next_node
 
       previous_node.next_node = following_node.next_node
       following_node.previous_node = previous_node
 
-    return "Removed node at position {} (value = {}).".format(position, previous_node.data)
+    print("Removed node at position {} (value = {}).".format(position, previous_node.data))
+    return previous_node.data
+
+
+class WrongPositionException(Exception):
+  def __init__(self, position, message='invalid position!'):
+    self.message = message
+    self.position = position
+
+  def __str__(self):
+    return '{} -> {}'.format(self.position, self.message)
