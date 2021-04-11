@@ -13,6 +13,7 @@ d.next_node = e
 
 ll = LinkedList(a)
 
+
 print('LinkedList: {}.'.format(ll.view()))
 print('LinkedList length: {}.'.format(ll.length()))
 print('Tail value: {}.'.format(ll.tail().data))
